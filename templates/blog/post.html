@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block pagehead %}
+  {% if page.earlier %}
+    <link rel="prerender" href="{{ page.earlier.permalink }}">
+  {% endif %}
+
+  {% if page.later %}
+    <link rel="prerender" href="{{ page.later.permalink }}">
+  {% endif %}
+
+{% endblock pagehead %}
+
+{% block content %}
+  <article class="post-shell">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.title }}</h1>
+      <div class="meta-row">
+        <span class="meta-item"><strong>{{ page.date | date(format="%B %d, %Y") }}</strong></span>
+        <span class="meta-item">{{ page.word_count }} words</span>
+        <span class="meta-item">{{ page.reading_time }} min</span>
+      </div>
+    </header>
+
+    <div class="markdown post-content">
+      {{ page.content | safe }}
+    </div>
+  </article>
+
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+{% block posthead %}
+
+  {% if config.extra.latest_posts and config.extra.latest_posts_num %}
+    {% set latest_posts_num = config.extra.latest_posts_num %}
+    {% set latest_list = section.pages[:latest_posts_num] %}
+    {% if latest_list %}
+      {% for post in latest_list %}
+        <link rel="prerender" href="{{ post.permalink }}" />
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+
+{% endblock posthead %}
+
+{% block content %}
+  {% if section.content %}
+    <section class="intro markdown">{{ section.content | safe }}</section>
+  {% endif %}
+
+  <section class="section-list">
+    <div class="section-head">
+      <h1>{{ config.extra.latest_posts | default(value="Latest Posts") }}</h1>
+    </div>
+
+    {% if config.extra.latest_posts_num %}
+      {% set latest_posts_num = config.extra.latest_posts_num %}
+      {% set latest_list = section.pages[:latest_posts_num] %}
+    {% else %}
+      {% set latest_list = section.pages %}
+    {% endif %}
+
+    <ul class="post-list">
+      {% for post in latest_list %}
+        {% include "post-preview.html" %}
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock content %}

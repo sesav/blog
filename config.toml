@@ -1,0 +1,40 @@
+base_url = "https://8am.dev"
+default_language = "en"
+author = "Sergey Silaev"
+
+compile_sass = true
+build_search_index = false
+minify_html = false
+
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+generate_robots_txt = true
+generate_sitemap = false
+
+title = "8am.dev"
+description = " Welcome to Sergey Silaev's personal webpage, featuring tech topics, coding, music, and more."
+
+[markdown]
+render_emoji = true
+smart_punctuation = true
+
+[markdown.highlighting]
+light_theme = "github-light"
+dark_theme = "github-dark"
+style = "class"
+
+[extra]
+nav = [{ name = "About", path = "/page/about/" },]
+
+email = "hello@8am.dev"
+
+footer_text = """
+© 2026 Sergey Silaev. This blog ([source code](https://github.com/sesav/blog)) is powered by Zola and hosted by
+[Hetzner](https://hetzner.cloud/?ref=SudmFOqhGezr) (referral link)."""
+
+not_found_message = """
+Couldn't find the page you are looking for..
+"""
+
+goatcounter_analytics = "gc.8am.dev"
+google_analytics = ""

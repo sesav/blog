@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block posthead %}
+  {% if paginator %}
+    {% for post in paginator.pages %}
+      <link rel="prerender" href="{{ post.permalink }}" />
+    {% endfor %}
+  {% else %}
+    {% for post in section.pages %}
+      <link rel="prerender" href="{{ post.permalink }}" />
+    {% endfor %}
+  {% endif %}
+{% endblock posthead %}
+
+{% block content %}
+  {% if section.content %}
+    <section class="intro markdown">{{ section.content | safe }}</section>
+  {% endif %}
+
+  <section class="section-list">
+    <ul class="post-list">
+      {% if paginator %}
+        {% for post in paginator.pages %}
+          {% include "post-preview.html" %}
+        {% endfor %}
+      {% else %}
+        {% for post in section.pages %}
+          {% include "post-preview.html" %}
+        {% endfor %}
+      {% endif %}
+    </ul>
+
+    {% if paginator and paginator.number_pagers > 1 %}
+      <nav class="pagination">
+        {% if paginator.previous %}
+          <a href="{{ paginator.previous }}" class="button-link">← Newer posts</a>
+        {% else %}
+          <span></span>
+        {% endif %}
+
+        <span class="pagination-info">Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</span>
+
+        {% if paginator.next %}
+          <a href="{{ paginator.next }}" class="button-link">Older posts →</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  </section>
+{% endblock content %}

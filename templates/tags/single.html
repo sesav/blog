@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block posthead %}
+  {% for post in term.pages %}
+    <link rel="prerender" href="{{ post.permalink }}" />
+  {% endfor %}
+{% endblock posthead %}
+
+{% block description %}
+  <meta name="description" content="Posts tagged #{{ term.name }}" />
+{% endblock description %}
+
+{% block content %}
+  <section class="section-list taxonomy-panel">
+    <div class="section-head">
+      <h1>#{{ term.name }}</h1>
+      <p class="muted">{{ term.pages | length }} posts</p>
+    </div>
+    <ul class="post-list">
+      {% for post in term.pages %}
+        {% include "post-preview.html" %}
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock content %}

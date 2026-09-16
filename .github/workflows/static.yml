@@ -1,0 +1,36 @@
+# name: Deploy blog
+# on:
+#   push:
+#     branches: ["main"]
+#     paths-ignore:
+#       - 'README.md'
+#   workflow_dispatch:
+#
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
+#
+# concurrency:
+#   group: "pages"
+#   cancel-in-progress: false
+#
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#
+#       - name: Deploy to vps
+#         uses: appleboy/ssh-action@v0.1.2
+#         with:
+#           host: ${{ secrets.VPS_HOST }}
+#           username: ${{ secrets.VPS_USER }}
+#           key: ${{ secrets.VPS_SSH_KEY }}
+#           port: ${{ secrets.VPS_PORT }}
+#           script: |
+#             cd /var/www/html/blog
+#             git pull && zola build
+#             docker restart $(docker ps -f name=nginx -q)

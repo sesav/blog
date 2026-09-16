@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block posthead %}
+  {% for term in terms %}
+    <link rel="prerender" href="{{ term.permalink }}" />
+  {% endfor %}
+{% endblock posthead %}
+
+{% block description %}
+  <meta name="description" content="Blog tags list" />
+{% endblock description %}
+
+{% block content %}
+  <section class="taxonomy-panel">
+    <ul class="taxonomy-grid">
+      {% for term in terms | sort(attribute="pages") | reverse %}
+        <li class="taxonomy-item">
+          <a href="{{ term.permalink }}">{{ term.name }}</a> ({{ term.pages | length }})
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock content %}
